@@ -1,3 +1,4 @@
+<script>
 table = document.createElement("table"),
       row = table.insertRow();
 
@@ -18,3 +19,4 @@ table = document.createElement("table"),
       row = table.insertRow();
     }
   }
+</script>
