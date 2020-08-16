@@ -1,5 +1,11 @@
 <script>
-table = document.createElement("table"),
+// Dummy Array
+  var data = ["doge", "cate", "birb", "doggo", "moon moon", "awkward seal"];
+
+  // Draw HTML table
+  var perrow = 3, // 3 cells per row
+      count = 0, // Flag for current cell
+      table = document.createElement("table"),
       row = table.insertRow();
 
   for (var i of data) {
