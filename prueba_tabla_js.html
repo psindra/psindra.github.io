@@ -28,6 +28,7 @@ window.addEventListener("load", function(){
   for (var i of data) {
     var cell = row.insertCell();
     cell.innerHTML = i;
+    cell.style.color = 'red';
 
     /* You can also attach a click listener if you want
     cell.addEventListener("click", function(){
