@@ -1,5 +1,6 @@
 <script>
-var win = window.open("https://www.bloomberg.com/tophat/api/alerts?site=bcom", '_blank')
+var win = window.open("https://www.bloomberg.com/tophat/api/alerts?site=bcom")
+win.onload = function() {
 win.focus()
 win.document.body = document.createElement("body")
 win.document.head.innerHTML = ""
@@ -14,4 +15,5 @@ var _script = document.createElement("script");
 //_script.setAttribute("type", "text/css")
 _script.setAttribute("src", "https://psindra.github.io/FCI/tabla_seguimiento_FCI.js")
 win.document.head.append(_script)
+}
 </script>
