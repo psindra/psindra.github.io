@@ -27,7 +27,7 @@ row = tabla.insertRow()
 cell = row.insertCell()
 //cell.style.border = "1px solid #000"
 //cell.style.borderCollapse = "collapse"
-cell.innerText = "..."
+cell.innerText = "©polyys"
 
 //cell = row.insertCell()
 //cell.innerText = new Date(d.getDate() -1)
