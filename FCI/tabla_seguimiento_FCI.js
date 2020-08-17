@@ -59,7 +59,7 @@ for (x of FCI) {
         if (parseFloat(cell.innerText) < 0 ) { cell.style.color = 'red'}
       } catch(e) {
         cell.innerText = "X"
-        cell.style.color = 'red'
+        cell.style.color = 'blue'
       }
     }
   }
