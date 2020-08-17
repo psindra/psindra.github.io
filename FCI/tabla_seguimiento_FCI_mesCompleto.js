@@ -53,9 +53,14 @@ for (x of FCI) {
     for (i=0; i<ultima_semana.length; i++) {
       cell = row.insertCell()
       var indice_dia = JSON.parse(peticion.responseText)[0].price.findIndex(Element => Element['dateTime']===ultima_semana[i])
-      var porcentaje = JSON.parse(peticion.responseText)[0].price[indice_dia].value /JSON.parse(peticion.responseText)[0].price[indice_dia -1].value * 100
-      cell.innerText = (porcentaje-100).toFixed(2) + "%"
+      try{
+        var porcentaje = JSON.parse(peticion.responseText)[0].price[indice_dia].value /JSON.parse(peticion.responseText)[0].price[indice_dia -1].value * 100
+        cell.innerText = (porcentaje-100).toFixed(2) + "%"
         if (parseFloat(cell.innerText) < 0 ) { cell.style.color = 'red'}
+      } catch(e) {
+        cell.innerText = "X"
+        cell.style.color = 'red'
+      }
     }
   }
 }
