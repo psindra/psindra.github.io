@@ -1,4 +1,6 @@
+var FCI = ['ALDIVEA' , 'BCRTAFA' , 'CDEUARA' , 'COMOPPA' , 'COMRF4A' , 'COMUSAA' , 'CONAARA' , 'CONBALA' , 'DGEST8A' , 'GALAHOR' , 'MGVRRAA' , 'MRTAFCA' , 'RJDGLOA' , 'RJDRTAA' , 'RJRTA4A' , 'SBSBALA' , 'SBSESTA' , 'SBSRPEA' , 'SBSRTOA' , 'TORRTOA'];
 var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];
+
 var ultima_semana=[];
 peticion = new XMLHttpRequest()
 peticion.open("GET","https://www.bloomberg.com/markets2/api/history/SBSBALA%3AAR/PX_LAST?timeframe=1_WEEK&period=daily", false)
