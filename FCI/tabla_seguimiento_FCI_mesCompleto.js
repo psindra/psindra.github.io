@@ -44,7 +44,7 @@ for (x of FCI) {
   row = tabla.insertRow()
 //  row.style.border = "1px solid #000"
   row.insertCell().innerText = x
-  var url = "https://www.bloomberg.com/markets2/api/history/" + x + "%3AAR/PX_LAST?timeframe=6_MONTH&period=daily"
+  var url = "https://www.bloomberg.com/markets2/api/history/" + x + "%3AAR/PX_LAST?timeframe=1_MONTH&period=daily"
   peticion = new XMLHttpRequest()
   peticion.open("GET", url, false)
   peticion.send()
