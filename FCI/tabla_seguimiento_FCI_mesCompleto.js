@@ -8,7 +8,7 @@ peticion.send()
 if (peticion.status === 200){
   //((JSON.parse(peticion.responseText))[0].price[0].dateTime)
   var dias_lenght = (JSON.parse(peticion.responseText))[0].price.length
-    for (i=0; i<dias_lenght; i++) {
+    for (i=0+1; i<dias_lenght; i++) { // se omite el primer día del mes xq sino no tendría con qué comparar (no hay día previo al primer día del mes)
       ultima_semana.push((JSON.parse(peticion.responseText))[0].price[i].dateTime)
     }
 }
