@@ -50,7 +50,7 @@ for (x of FCI) {
   peticion.send()
 
   if (peticion.status === 200) {
-    for (i=1; i<ultima_semana.length; i++) {
+    for (i=0; i<ultima_semana.length; i++) {
       cell = row.insertCell()
       var indice_dia = JSON.parse(peticion.responseText)[0].price.findIndex(Element => Element['dateTime']===ultima_semana[i])
       try{
