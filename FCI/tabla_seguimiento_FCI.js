@@ -3,7 +3,7 @@ var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A'
 
 var ultima_semana=[];
 peticion = new XMLHttpRequest()
-peticion.open("GET","https://www.bloomberg.com/markets2/api/history/SBSBALA%3AAR/PX_LAST?timeframe=1_WEEK&period=daily", false)
+peticion.open("GET","https://www.bloomberg.com/markets2/api/history/COMOPPA%3AAR/PX_LAST?timeframe=1_WEEK&period=daily", false)
 peticion.send()
 if (peticion.status === 200){
   //((JSON.parse(peticion.responseText))[0].price[0].dateTime)
