@@ -2,7 +2,7 @@
 //var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];
 
 try {FCI}catch{var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];}
-try {timeframe}catch{var timeframe = "1_MONTH";}
+try {timeframe}catch{ timeframe = '1_MONTH';}
 
 var ultima_semana=[];
 peticion = new XMLHttpRequest()
