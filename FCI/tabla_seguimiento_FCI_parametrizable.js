@@ -1,12 +1,21 @@
 //var FCI = ['ALDIVEA' , 'BCRTAFA' , 'CDEUARA' , 'COMOPPA' , 'COMRF4A' , 'COMUSAA' , 'CONAARA' , 'CONBALA' , 'DGEST8A' , 'GALAHOR' , 'MGVRRAA' , 'MRTAFCA' , 'RJDGLOA' , 'RJDRTAA' , 'RJRTA4A' , 'SBSBALA' , 'SBSESTA' , 'SBSRPEA' , 'SBSRTOA' , 'TORRTOA'];
 //var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];
 
-try {FCI}catch{var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];}
-try {_timeframe}catch{ _timeframe = '1_MONTH';}
+//try {FCI}catch{var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];}
+//try {_timeframe}catch{ _timeframe = '1_MONTH';}
+
+if (typeof FCI === "undefined") {
+  var FCI = ['ALDIVEA' , 'BCRTAFA' , 'CDEUARA' , 'COMOPPA' , 'COMRF4A' , 'COMUSAA' , 'CONAARA' , 'CONBALA' , 'DGEST8A' , 'GALAHOR' , 'MGVRRAA' , 'MRTAFCA' , 'RJDGLOA' , 'RJDRTAA' , 'RJRTA4A' , 'SBSBALA' , 'SBSESTA' , 'SBSRPEA' , 'SBSRTOA' , 'TORRTOA'];
+}
+
+if (typeof timeframe === "undefined") {
+  var timeframe = "1_MONTH";
+}
+
 
 var ultima_semana=[];
 peticion = new XMLHttpRequest()
-peticion.open("GET","https://www.bloomberg.com/markets2/api/history/COMOPPA%3AAR/PX_LAST?timeframe="+ _timeframe +"&period=daily", false)
+peticion.open("GET","https://www.bloomberg.com/markets2/api/history/COMOPPA%3AAR/PX_LAST?timeframe="+ timeframe +"&period=daily", false)
 peticion.send()
 if (peticion.status === 200){
   //((JSON.parse(peticion.responseText))[0].price[0].dateTime)
