@@ -1,15 +1,13 @@
 //var FCI = ['ALDIVEA' , 'BCRTAFA' , 'CDEUARA' , 'COMOPPA' , 'COMRF4A' , 'COMUSAA' , 'CONAARA' , 'CONBALA' , 'DGEST8A' , 'GALAHOR' , 'MGVRRAA' , 'MRTAFCA' , 'RJDGLOA' , 'RJDRTAA' , 'RJRTA4A' , 'SBSBALA' , 'SBSESTA' , 'SBSRPEA' , 'SBSRTOA' , 'TORRTOA'];
 //var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];
 
-//try {FCI}catch{var FCI = ['CONBALA' , 'CDEUARA' , 'CONAARA' , 'RJDRTAA' , 'RJDGLOA' , 'RJRTA4A' , 'SBSRPEA' , 'SBSBALA' , 'DGEST8A' , 'SBSRTOA' , 'SBSESTA' , 'COMOPPA' , 'COMUSAA' , 'COMRF4A' , 'BCRTAFA' , 'MGVRRAA' , 'GALAHOR' , 'ALDIVEA' , 'MRTAFCA' , 'TORRTOA'];}
-//try {_timeframe}catch{ _timeframe = '1_MONTH';}
 
 if (typeof FCI === "undefined") {
   var FCI = ['ALDIVEA' , 'BCRTAFA' , 'CDEUARA' , 'COMOPPA' , 'COMRF4A' , 'COMUSAA' , 'CONAARA' , 'CONBALA' , 'DGEST8A' , 'GALAHOR' , 'MGVRRAA' , 'MRTAFCA' , 'RJDGLOA' , 'RJDRTAA' , 'RJRTA4A' , 'SBSBALA' , 'SBSESTA' , 'SBSRPEA' , 'SBSRTOA' , 'TORRTOA'];
 }
 
 if (typeof timeframe === "undefined") {
-  var timeframe = "1_MONTH";
+  var timeframe = '1_MONTH';
 }
 
 
