@@ -13,7 +13,7 @@ if (typeof timeframe === "undefined") {
 
 var ultima_semana=[];
 peticion = new XMLHttpRequest()
-peticion.open("GET","https://www.bloomberg.com/markets2/api/history/COMOPPA%3AAR/PX_LAST?timeframe="+ timeframe +"&period=daily", false)
+peticion.open("GET","https://www.bloomberg.com/markets2/api/history/USDARS%3ACUR//PX_LAST?timeframe="+ timeframe +"&period=daily", false)
 peticion.send()
 if (peticion.status === 200){
   //((JSON.parse(peticion.responseText))[0].price[0].dateTime)
@@ -38,6 +38,12 @@ cell = row.insertCell()
 //cell.style.border = "1px solid #000"
 //cell.style.borderCollapse = "collapse"
 cell.innerText = "©polyys"
+
+peticion.open("GET","https://www.bloomberg.com/markets2/api/quote/CUR/USDARS%3ACUR", false);peticion.send();
+if (peticion.status === 200) {
+  var cotizacion_dolar = JSON.parse(peticion.responseText).price;
+  cell.innerHTML += "<br>USD: " + cotizacion_dolar;
+}
 
 //cell = row.insertCell()
 //cell.innerText = new Date(d.getDate() -1)
