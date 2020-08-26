@@ -42,7 +42,7 @@ cell.innerText = "©polyys"
 peticion.open("GET","https://www.bloomberg.com/markets2/api/quote/CUR/USDARS%3ACUR", false);peticion.send();
 if (peticion.status === 200) {
   var cotizacion_dolar = JSON.parse(peticion.responseText).price;
-  cell.innerHTML += "<br> <font size='-1'>USD: " + cotizacion_dolar + "</font>";
+  cell.innerHTML += "<br> <font size=-1>USD: " + cotizacion_dolar + "</font>";
 }
 
 // <font size="-2">cell = row.insertCell()
