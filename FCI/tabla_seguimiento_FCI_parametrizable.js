@@ -60,7 +60,7 @@ var x;
 for (x of FCI) {
   row = tabla.insertRow()
 //  row.style.border = "1px solid #000"
-  row.insertCell().innerText = '<a href="https://www.bloomberg.com/quote/' + x + ':AR" target="_blank">' + x + '</a>';
+  row.insertCell().innerHTML = '<a href="https://www.bloomberg.com/quote/' + x + ':AR" target="_blank">' + x + '</a>';
   var url = "https://www.bloomberg.com/markets2/api/history/" + x + "%3AAR/PX_LAST?timeframe=1_MONTH&period=daily"
   peticion = new XMLHttpRequest()
   peticion.open("GET", url, false)
