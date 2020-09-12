@@ -1,0 +1,6 @@
+//nombres
+https://genderapi.io/api/?country=AR&name= {%s}
+
+// emails
+https://genderapi.io/email?email= {email@email.com}
+
