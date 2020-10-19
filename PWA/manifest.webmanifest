@@ -1,7 +1,7 @@
 {
   "name": "web.dev",
   "short_name": "web.dev",
-  "start_url": "./",
+  "start_url": "./PWA_web",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#3740ff",
