@@ -1,6 +1,7 @@
 time = 3
 h = Array();
 index = 0;
+alert("Welcome!");
 h[0] = () => document.getElementsByTagName('fieldset')[6].children[0].children[2].children[2].click()
 h[1] = () => document.querySelector("body > div:nth-child(7) > div.MenuTableContainer > table > tbody > tr:nth-child(3) > td.MenuEntryNameHover").click()
 h[2] = () => document.querySelector("body > table > tbody > tr:nth-child(1) > td:nth-child(3) > a").click()
@@ -18,5 +19,11 @@ intervalo = setInterval( ()=>
 				h[index]();
 				index++;
 			} catch(e) {};
-			if (index >= h.length && !confirm("más tickets por cargar??")){clearInterval(intervalo);}
+	
+			if (index >= h.length) {
+				index = 0;
+				if (!confirm("más tickets por cargar??")) {
+					clearInterval(intervalo);
+				}
+			}
 		}, time * 1000);
