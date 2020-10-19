@@ -21,7 +21,7 @@
   "shortcuts": [
     {
       "name": "Measure",
-      "url": "www.google.com.ar"
+      "url": "./PWA_web"
     }
   ]
 }
