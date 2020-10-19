@@ -2,7 +2,7 @@ console.log("antes de instalar");
 self.addEventListener('install', function(e) {
     console.log("cuando se está instalando??");
     e.waitUntil(
-        caches.open(cacheName).then(function(cache) {
+        caches.open('v1:static').then(function(cache) {
             return cache.addAll([
                 './',
                 './index.html',
