@@ -44,12 +44,13 @@
         <input class="form-check-input" type="checkbox" id="CursorEnable">
         <label class="form-check-label" for="CursorEnable">Activar Cursor</label>
     </div>
+        <h2 id="Grabando..." align="center" style="color: white">Grabando ...</h2>
     <div class="p-5">
 <!--         <video autoplay height='480' width="640" muted></video> -->
         <video id="video" autoplay muted></video>
     </div>
     <span>
-        <button type="button" onclick="recordSelectedScreen()" class="btn btn-success" id="start" disable>Start recording selected Screen</button>
+        <button type="button" onclick="recordSelectedScreen()" class="btn btn-success" id="start" disable> ▶ Start recording selected Screen</button>
         <button type="button" class="btn btn-danger" id="stop" disabled>Stop</button>
     </span>
     <span>
@@ -60,33 +61,40 @@
     <script>
         let shouldStop = false;
         let stopped = false;
+        let displayStream = null;
         const videoElement = document.getElementsByTagName("video")[0];
         const downloadLink = document.getElementById('download');
         const stopButton = document.getElementById('stop');
         const micEnable = document.getElementById('MicEnable');
         const cursorEnable = document.getElementById('CursorEnable');
+        const grabandoText = document.querySelector("#Grabando\\.\\.\\.");
         function startRecordUI() {
             $('.btn-info').prop('disabled', true);
             $('#stop').prop('disabled', false);
-            $('#download').css('display', 'none')
+            $('#download').css('display', 'none');
+            $('#start').prop('disabled', true);
+            $("#Grabando\\.\\.\\.").prop("style","color: green")
+            
         }
         function stopRecordUI() {
             $('.btn-info').prop('disabled', false);
             $('#stop').prop('disabled', true);
-            $('#download').css('display', 'block')
+            $('#download').css('display', 'block');
+            disableRecordUI();
+            $("#Grabando\\.\\.\\.").prop("style","color: white");
         }
         function enableRecordUI() {
             $('#start').prop('disabled', false);
-            $('#start').prop("class","btn btn-success")
+            $('#start').prop("class","btn btn-success");
         }
         function disableRecordUI() {
             $('#start').prop('disabled', true);
-            $('#start').prop("class","btn btn-info")
+            $('#start').prop("class","btn btn-info");
         }
         
-        const audioRecordConstraints = {
-            echoCancellation: true
-        }
+// //         const audioRecordConstraints = {
+// //             echoCancellation: true
+// //         }
 
         stopButton.addEventListener('click', function () {
             shouldStop = true;
@@ -119,6 +127,7 @@
 //                 downloadLink.download = `${filename || 'recording'}.webm`;
                 downloadLink.download = `${filename || 'recording'}.mp4`;
                 stopRecordUI();
+                videoElement.srcObject.getTracks().forEach( track => { track.stop()});                
                 videoElement.srcObject = null;
                 videoElement.src = downloadLink.href;
             };
@@ -126,35 +135,35 @@
             mediaRecorder.start(200);
         };
 
-        async function recordAudio() {
-            const mimeType = 'audio/webm';
-            shouldStop = false;
-            const stream = await navigator.mediaDevices.getUserMedia({audio: audioRecordConstraints});
-            handleRecord({stream, mimeType})
-        }
-
-        async function recordVideo() {
-            const mimeType = 'video/webm';
-            shouldStop = false;
-            const constraints = {
-                audio: {
-                    "echoCancellation": true
-                },
-                video: {
-                    "width": {
-                        "min": 640,
-                        "max": 1024
-                    },
-                    "height": {
-                        "min": 480,
-                        "max": 768
-                    }
-                }
-            };
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            videoElement.srcObject = stream;
-            handleRecord({stream, mimeType})
-        }
+// //         async function recordAudio() {
+// //             const mimeType = 'audio/webm';
+// //             shouldStop = false;
+// //             const stream = await navigator.mediaDevices.getUserMedia({audio: audioRecordConstraints});
+// //             handleRecord({stream, mimeType})
+// //         }
+        
+// //         async function recordVideo() {
+// //             const mimeType = 'video/webm';
+// //             shouldStop = false;
+// //             const constraints = {
+// //                 audio: {
+// //                     "echoCancellation": true
+// //                 },
+// //                 video: {
+// //                     "width": {
+// //                         "min": 640,
+// //                         "max": 1024
+// //                     },
+// //                     "height": {
+// //                         "min": 480,
+// //                         "max": 768
+// //                     }
+// //                 }
+// //             };
+// //             const stream = await navigator.mediaDevices.getUserMedia(constraints);
+// //             videoElement.srcObject = stream;
+// //             handleRecord({stream, mimeType})
+// //         }
         
         async function selectScreen() {
             const mimeType = 'video/mp4';
@@ -168,7 +177,7 @@
                 return window.alert('Screen Record not supported!')
             }
             let stream = null;
-            let displayStream = null;
+            displayStream = null;
 //             const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}});
             displayStream = await navigator.mediaDevices.getDisplayMedia(MediaConstraints);
             
@@ -178,6 +187,7 @@
                 enableRecordUI();
             } else {
                 disableRecordUI();
+                alert("No Screen selected");
             }
         }
         
@@ -185,7 +195,8 @@
             const mimeType = 'video/mp4';
             
             let stream = null;
-            stream = videoElement.srcObject
+            videoElement.src = null;
+            stream = videoElement.srcObject;
             
             if (videoElement.srcObject != null) {
                 if (micEnable.checked) {
@@ -216,6 +227,7 @@
                 stream = displayStream;
                 handleRecord({stream, mimeType});
             };
+            videoElement.src = null;
             videoElement.srcObject = stream;
         }
     </script>
