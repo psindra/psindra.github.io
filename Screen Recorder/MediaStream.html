@@ -8,19 +8,53 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+    <style type="text/css">
+        #video {
+                  border: 1px solid #999;
+                  width: 98%;
+                  max-width: 860px;
+                }
+
+                .error {
+                  color: red;
+                }
+
+                .warn {
+                  color: orange;
+                }
+
+                .info {
+                  color: darkgreen;
+                }
+    </style>
 </head>
 
 <body>
     <div class="container mt-3">
-    <span><a id="download" style="display: none;"><button type="button" class="btn btn-primary mb-4"> Download</button></a></span>
     <button type="button" class="btn btn-danger" id="stop" disabled>Stop</button>
-    <button type="button" onclick="recordAudio()" class="btn btn-info">Record Audio</button>
-    <button type="button" onclick="recordVideo()" class="btn btn-info">Record Video</button>
-    <button type="button" onclick="recordScreen()" class="btn btn-info">Record Screen</button>
-    <div class="p-5">
-        <video autoplay height='480' width="640" muted></video>
+<!--     <button type="button" onclick="recordAudio()" class="btn btn-info">Record Audio</button> -->
+<!--     <button type="button" onclick="recordVideo()" class="btn btn-info">Record Video</button> -->
+    <button type="button" onclick="selectScreen()" class="btn btn-info">Select Screen</button>
+<!--     <button type="button" onclick="recordScreen()" class="btn btn-info">Record Screen</button> -->
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="MicEnable">
+        <label class="form-check-label" for="MicEnable">Activar Micrófono</label>
     </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="CursorEnable">
+        <label class="form-check-label" for="CursorEnable">Activar Cursor</label>
+    </div>
+    <div class="p-5">
+<!--         <video autoplay height='480' width="640" muted></video> -->
+        <video id="video" autoplay muted></video>
+    </div>
+    <span>
+        <button type="button" onclick="recordSelectedScreen()" class="btn btn-success" id="start" disable>Start recording selected Screen</button>
+        <button type="button" class="btn btn-danger" id="stop" disabled>Stop</button>
+    </span>
+    <span>
+        <a id="download" style="display: none;"><button type="button" class="btn btn-primary mb-4"> Download</button></a>
+    </span>
     </div>
     
     <script>
@@ -29,16 +63,27 @@
         const videoElement = document.getElementsByTagName("video")[0];
         const downloadLink = document.getElementById('download');
         const stopButton = document.getElementById('stop');
-        function startRecord() {
+        const micEnable = document.getElementById('MicEnable');
+        const cursorEnable = document.getElementById('CursorEnable');
+        function startRecordUI() {
             $('.btn-info').prop('disabled', true);
             $('#stop').prop('disabled', false);
             $('#download').css('display', 'none')
         }
-        function stopRecord() {
+        function stopRecordUI() {
             $('.btn-info').prop('disabled', false);
             $('#stop').prop('disabled', true);
             $('#download').css('display', 'block')
         }
+        function enableRecordUI() {
+            $('#start').prop('disabled', false);
+            $('#start').prop("class","btn btn-success")
+        }
+        function disableRecordUI() {
+            $('#start').prop('disabled', true);
+            $('#start').prop("class","btn btn-info")
+        }
+        
         const audioRecordConstraints = {
             echoCancellation: true
         }
@@ -48,7 +93,7 @@
         });
 
         const handleRecord = function ({stream, mimeType}) {
-            startRecord()
+            startRecordUI()
             let recordedChunks = [];
             stopped = false;
             const mediaRecorder = new MediaRecorder(stream);
@@ -65,15 +110,17 @@
             };
 
             mediaRecorder.onstop = function () {
-                const blob = new Blob(recordedChunks, {
+                const recordedBlob = new Blob(recordedChunks, {
                     type: mimeType
                 });
                 recordedChunks = []
                 const filename = window.prompt('Enter file name');
-                downloadLink.href = URL.createObjectURL(blob);
-                downloadLink.download = `${filename || 'recording'}.webm`;
-                stopRecord();
-                videoElement.srcObject = blob;
+                downloadLink.href = URL.createObjectURL(recordedBlob);
+//                 downloadLink.download = `${filename || 'recording'}.webm`;
+                downloadLink.download = `${filename || 'recording'}.mp4`;
+                stopRecordUI();
+                videoElement.srcObject = null;
+                videoElement.src = downloadLink.href;
             };
 
             mediaRecorder.start(200);
@@ -108,15 +155,53 @@
             videoElement.srcObject = stream;
             handleRecord({stream, mimeType})
         }
-
-        async function recordScreen() {
-            const mimeType = 'video/webm';
+        
+        async function selectScreen() {
+            const mimeType = 'video/mp4';
             shouldStop = false;
-            const constraints = {
-                video: {
-                    cursor: 'motion'
+            if (cursorEnable.checked) {
+                const constraints = {video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
+            } else {
+                const constraints = {video: {cursor: "never"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
+            }
+            if(!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia)) {
+                return window.alert('Screen Record not supported!')
+            }
+            let stream = null;
+            let displayStream = null;
+//             const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}});
+            displayStream = await navigator.mediaDevices.getDisplayMedia(constraints);
+            
+            videoElement.srcObject = displayStream;
+            
+            if(videoElement.srcObject != null) {
+                enableRecordUI();
+            } else {
+                disableRecordUI();
+            }
+        }
+        
+        async function recordSelectedScreen() {
+            const mimeType = 'video/mp4';
+            
+            let stream = null;
+            stream = videoElement.srcObject
+            
+            if (videoElement.srcObject != null) {
+                if (micEnable.checked) {
+                    const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: {'echoCancellation': true}, video: false });
+                    let tracks = [...videoElement.srcObject.getTracks(), ...voiceStream.getAudioTracks()]
+                    stream = new MediaStream(tracks);
                 }
-            };
+                handleRecord({stream, mimeType});
+            } else {
+                alert("No Screen selected");
+            }
+        }
+        
+        async function recordScreen() {
+            shouldStop = false;
+            
             if(!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia)) {
                 return window.alert('Screen Record not supported!')
             }
