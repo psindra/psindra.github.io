@@ -26,6 +26,23 @@
                 .info {
                   color: darkgreen;
                 }
+        
+        * {
+            box-sizing: border-box;
+        }
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px; /* Should be removed. Only for demonstration */
+        }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
 
@@ -60,10 +77,23 @@
     
     <br>
     <br>
-    <strong>Log:</strong>
-    <br>
-    <pre id="log"></pre>
-    
+    <div class='row'>
+        <div class='column'>
+            <span>
+                <strong>Log:</strong>
+                <br>
+                <pre id="log"></pre>
+            </span>
+        </div>
+        <div class='column'>
+            <span>
+                <strong>Download List:</strong>
+                <br>
+                <pre id="downloadList"></pre>
+            </span>
+        </div>
+    </div>
+        
     <script>
         let shouldStop = false;
         let stopped = false;
@@ -75,6 +105,7 @@
         const cursorEnable = document.getElementById('CursorEnable');
         const grabandoText = document.querySelector("#Grabando\\.\\.\\.");
         const logElem = document.getElementById("log");
+        const downloadList = document.getElementById("downloadList");
         
         console.log = msg => logElem.innerHTML += `${msg}<br>`;
         console.error = msg => logElem.innerHTML += `<span class="error">${msg}</span><br>`;
@@ -147,6 +178,8 @@
                 videoElement.src = downloadLink.href;
                 videoElement.controls = true;
                 videoElement.muted = false;
+                
+                downloadList.innerHTML += '<br> <a href=' + downloadLink + '>' + downloadLink + '</a>'
             };
 
             mediaRecorder.start(200);
