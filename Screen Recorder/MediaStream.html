@@ -199,6 +199,7 @@
 //             const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}});
             displayStream = await navigator.mediaDevices.getDisplayMedia(MediaConstraints);
             
+            videoElement.removeAttribute('src')
             videoElement.srcObject = displayStream;
             videoElement.controls = false;
             videoElement.muted = true;
