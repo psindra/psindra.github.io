@@ -251,12 +251,14 @@
         }
         
         function dumpOptionsInfo() {
-            const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-            
-            console.info("Track settings:");
-            console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
-            console.info("Track constraints:");
-            console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+            const tracks = videoElement.srcObject.getTracks();
+            tracks.forEach(track => {
+                console.info(track.kind + "Track settings:");
+                console.info(JSON.stringify(track.getSettings(), null, 2));
+                console.info(track.kind + "Track constraints:");
+                console.info(JSON.stringify(track.getConstraints(), null, 2));
+                console.info("\n");
+            });
         }
     </script>
 </body>
