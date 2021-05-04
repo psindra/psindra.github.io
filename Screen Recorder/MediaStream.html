@@ -121,7 +121,7 @@
                 return window.alert('Screen Record not supported!')
             }
             let stream = null;
-            const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': true}});
+            const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}});
             if(window.confirm("Record audio with screen?")){
                 const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: {'echoCancellation': true}, video: false });
                 let tracks = [...displayStream.getTracks(), ...voiceStream.getAudioTracks()]
