@@ -143,6 +143,8 @@
                 videoElement.srcObject.getTracks().forEach( track => { track.stop()});                
                 videoElement.srcObject = null;
                 videoElement.src = downloadLink.href;
+                videoElement.controls = true;
+                videoElement.muted = false;
             };
 
             mediaRecorder.start(200);
@@ -196,6 +198,8 @@
             displayStream = await navigator.mediaDevices.getDisplayMedia(MediaConstraints);
             
             videoElement.srcObject = displayStream;
+            videoElement.controls = false;
+            videoElement.muted = true;
             
             if(videoElement.srcObject != null) {
                 enableRecordUI();
