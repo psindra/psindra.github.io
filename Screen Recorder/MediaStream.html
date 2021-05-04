@@ -58,7 +58,7 @@
                 downloadLink.href = URL.createObjectURL(blob);
                 downloadLink.download = `${filename || 'recording'}.webm`;
                 stopRecord();
-                videoElement.srcObject = null;
+                videoElement.srcObject = downloadLink.href;
             };
 
             mediaRecorder.start(200);
