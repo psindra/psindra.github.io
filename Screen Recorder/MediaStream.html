@@ -58,6 +58,12 @@
     </span>
     </div>
     
+    <br>
+    <br>
+    <strong>Log:</strong>
+    <br>
+    <pre id="log"></pre>
+    
     <script>
         let shouldStop = false;
         let stopped = false;
@@ -68,6 +74,13 @@
         const micEnable = document.getElementById('MicEnable');
         const cursorEnable = document.getElementById('CursorEnable');
         const grabandoText = document.querySelector("#Grabando\\.\\.\\.");
+        const logElem = document.getElementById("log");
+        
+        console.log = msg => logElem.innerHTML += `${msg}<br>`;
+        console.error = msg => logElem.innerHTML += `<span class="error">${msg}</span><br>`;
+        console.warn = msg => logElem.innerHTML += `<span class="warn">${msg}<span><br>`;
+        console.info = msg => logElem.innerHTML += `<span class="info">${msg}</span><br>`;
+        
         function startRecordUI() {
             $('.btn-info').prop('disabled', true);
             $('#stop').prop('disabled', false);
@@ -166,6 +179,7 @@
 // //         }
         
         async function selectScreen() {
+            logElem.innerHTML = "";
             const mimeType = 'video/mp4';
             shouldStop = false;
             if (cursorEnable.checked) {
