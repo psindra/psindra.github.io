@@ -214,7 +214,7 @@
             const mimeType = 'video/mp4';
             
             let stream = null;
-            videoElement.src = null;
+            videoElement.removeAttribute('src');
             stream = videoElement.srcObject;
             
             if (videoElement.srcObject != null) {
@@ -246,7 +246,7 @@
                 stream = displayStream;
                 handleRecord({stream, mimeType});
             };
-            videoElement.src = null;
+            videoElement.removeAttribute('src')
             videoElement.srcObject = stream;
         }
         
