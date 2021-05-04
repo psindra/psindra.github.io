@@ -160,9 +160,9 @@
             const mimeType = 'video/mp4';
             shouldStop = false;
             if (cursorEnable.checked) {
-                const constraints = {video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
+                MediaConstraints = {video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
             } else {
-                const constraints = {video: {cursor: "never"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
+                MediaConstraints = {video: {cursor: "never"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
             }
             if(!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia)) {
                 return window.alert('Screen Record not supported!')
@@ -170,7 +170,7 @@
             let stream = null;
             let displayStream = null;
 //             const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}});
-            displayStream = await navigator.mediaDevices.getDisplayMedia(constraints);
+            displayStream = await navigator.mediaDevices.getDisplayMedia(MediaConstraints);
             
             videoElement.srcObject = displayStream;
             
