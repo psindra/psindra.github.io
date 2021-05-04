@@ -83,6 +83,7 @@
         
         function startRecordUI() {
             $('.btn-info').prop('disabled', true);
+            $('.form-check-input').prop('disabled', true);
             $('#stop').prop('disabled', false);
             $('#download').css('display', 'none');
             $('#start').prop('disabled', true);
@@ -91,6 +92,7 @@
         }
         function stopRecordUI() {
             $('.btn-info').prop('disabled', false);
+            $('.form-check-input').prop('disabled', false);
             $('#stop').prop('disabled', true);
             $('#download').css('display', 'block');
             disableRecordUI();
