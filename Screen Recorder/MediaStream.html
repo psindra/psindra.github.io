@@ -109,6 +109,7 @@
         const grabandoText = document.querySelector("#Grabando\\.\\.\\.");
         const logElem = document.getElementById("log");
         const downloadList = document.getElementById("downloadList");
+        mimeTypeVar = 'video/mp4';
         
         console.log = msg => logElem.innerHTML += `${msg}<br>`;
         console.error = msg => logElem.innerHTML += `<span class="error">${msg}</span><br>`;
@@ -149,7 +150,7 @@
             shouldStop = true;
         });
 
-        const handleRecord = function ({stream, mmimeType}) {
+        handleRecord = function ({stream, mmimeType}) {
             startRecordUI()
             let recordedChunks = [];
             stopped = false;
@@ -220,7 +221,6 @@
         
         async function selectScreen() {
             logElem.innerHTML = "";
-            const mimeType = 'video/mp4';
             shouldStop = false;
             if (cursorEnable.checked) {
                 MediaConstraints = {video: {cursor: "motion"}, audio: {'echoCancellation': false, "noiseSuppression": false}};
@@ -243,15 +243,14 @@
             
             if(videoElement.srcObject != null) {
                 enableRecordUI();
+                if ((mimeTypeVar = window.prompt("mimeType",'video/mp4')) == null) { mimeTypeVar = 'video/mp4';};
             } else {
                 disableRecordUI();
                 alert("No Screen selected");
             }
         }
         
-        async function recordSelectedScreen() {
-            const mimeType = 'video/mp4';
-            
+        async function recordSelectedScreen() {            
             let stream = null;
             videoElement.removeAttribute('src');
             stream = videoElement.srcObject;
@@ -262,7 +261,7 @@
                     let tracks = [...videoElement.srcObject.getTracks(), ...voiceStream.getAudioTracks()]
                     stream = new MediaStream(tracks);
                 }
-                handleRecord({stream, mimeType});
+                handleRecord({stream, mimeTypeVar});
             } else {
                 alert("No Screen selected");
             }
@@ -280,10 +279,10 @@
                 const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: {'echoCancellation': true}, video: false });
                 let tracks = [...displayStream.getTracks(), ...voiceStream.getAudioTracks()]
                 stream = new MediaStream(tracks);
-                handleRecord({stream, mimeType})
+                handleRecord({stream, mimeTypeVar})
             } else {
                 stream = displayStream;
-                handleRecord({stream, mimeType});
+                handleRecord({stream, mimeTypeVar});
             };
             videoElement.removeAttribute('src')
             videoElement.srcObject = stream;
