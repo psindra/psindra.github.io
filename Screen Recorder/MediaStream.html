@@ -149,11 +149,11 @@
             shouldStop = true;
         });
 
-        const handleRecord = function ({stream, mimeType}) {
+        const handleRecord = function ({stream, mmimeType}) {
             startRecordUI()
             let recordedChunks = [];
             stopped = false;
-            const mediaRecorder = new MediaRecorder(stream);
+            const mediaRecorder = new MediaRecorder(stream, {mimeType: mmimeType});
 
             mediaRecorder.ondataavailable = function (e) {
                 if (e.data.size > 0) {
@@ -168,7 +168,7 @@
 
             mediaRecorder.onstop = function () {
                 const recordedBlob = new Blob(recordedChunks, {
-                    type: mimeType
+                    type: mmimeType
                 });
                 recordedChunks = []
                 const filename = window.prompt('Enter file name');
