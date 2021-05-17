@@ -38,7 +38,7 @@
         );
 
         let buffer = new Uint8Array(ciphertext, 0, 5);
-        const ciphertextValue = document.querySelector(".rsa-oaep .ciphertext-value");
+        const ciphertextValue = document.querySelector(".ciphertext-value");
         ciphertextValue.classList.add('fade-in');
         ciphertextValue.addEventListener('animationend', () => {
           ciphertextValue.classList.remove('fade-in');
@@ -60,7 +60,7 @@
         );
 
         let dec = new TextDecoder();
-        const decryptedValue = document.querySelector(".rsa-oaep .decrypted-value");
+        const decryptedValue = document.querySelector(".decrypted-value");
         decryptedValue.classList.add('fade-in');
         decryptedValue.addEventListener('animationend', () => {
           decryptedValue.classList.remove('fade-in');
