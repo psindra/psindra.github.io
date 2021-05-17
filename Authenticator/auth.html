@@ -23,21 +23,30 @@
         document.getElementById('result').innerText = code;
       }
       
-      setInterval(modificar_label,25000);
+      setInterval(modificar_label,5000);
       
     </script>
   </head>
   <body>
-    <form onsubmit="calcular(); return false;">
-      <label for="pass">First name:</label>
+    <form onsubmit="logging(); return false;">
+      <label for="pass">Phase</label>
       <br>
-      <input type="text" id="pass" name="pass" value="">
+      <input type="passsword" id="pass" name="pass" value="">
       <br>
-      <label id='result' for="lname">Result</label>
+<!--       <label id='result' for="lname">Result</label> -->
       <br>
 <!--       <input type="text" id="lname" name="lname" value="Doe"> -->
       <br><br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Log">
     </form>
+    
+    <div>
+      <div>
+        <label id="Binance" value="Binance Label"> Binance Inner text</label>
+        <input type="text" id="BinanceText" value="" readonnly>  <br>  <br>
+        
+        
+      </div>
+    </div>
   </body>
 </html>
