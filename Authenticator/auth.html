@@ -6,8 +6,24 @@
         // window.otplib.authenticator
         // window.otplib.hotp
         // window.otplib.totp
+      function calcular() {
+        pass = document.getElementById('pass');
+        result_ = otplib.authenticator.generate(pass);
+        document.getElementById('result').innerText = result_;
+      }        
     </script>
   </head>
   <body>
+    <form onsubmit="javascript:calcular()">
+      <label for="pass">First name:</label>
+      <br>
+      <input type="text" id="pass" name="pass" value="">
+      <br>
+      <label id='result' for="lname">Result</label>
+      <br>
+<!--       <input type="text" id="lname" name="lname" value="Doe"> -->
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
