@@ -83,12 +83,12 @@
         true,
         ["encrypt", "decrypt"]
       ).then((keyPair) => {
-        const encryptButton = document.querySelector(".rsa-oaep .encrypt-button");
+        const encryptButton = document.querySelector(".encrypt-button");
         encryptButton.addEventListener("click", () => {
           encryptMessage(keyPair.publicKey);
         });
 
-        const decryptButton = document.querySelector(".rsa-oaep .decrypt-button");
+        const decryptButton = document.querySelector(".decrypt-button");
         decryptButton.addEventListener("click", () => {
           decryptMessage(keyPair.privateKey);
         });
