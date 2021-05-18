@@ -6,29 +6,29 @@
         // window.otplib.authenticator
         // window.otplib.hotp
         // window.otplib.totp
-      function calcular_() {
-        pass = document.getElementById('pass').value;
-        result_ = otplib.authenticator.generate(pass);
-        document.getElementById('result').innerText = result_;
-      }
+//       function calcular_() {
+//         pass = document.getElementById('pass').value;
+//         result_ = otplib.authenticator.generate(pass);
+//         document.getElementById('result').innerText = result_;
+//       }
       
       
-      function calcular_code(secret) {
-        result_ = otplib.authenticator.generate(secret);
-        return result_;
-      }
+//       function calcular_code(secret) {
+//         result_ = otplib.authenticator.generate(secret);
+//         return result_;
+//       }
       
-      function modificar_label(){
-        code = calcular_code(document.getElementById('pass').value);
-        document.getElementById('BinanceText').value = code;
-      }
+//       function modificar_label(){
+//         code = calcular_code(document.getElementById('pass').value);
+//         document.getElementById('BinanceText').value = code;
+//       }
       
       
-//       setInterval(modificar_label,5000);
+// //       setInterval(modificar_label,5000);
       
-//     </script>
+// //     </script>
     
-//     <script>
+// //     <script>
       
       let salt = new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
       let iv = new Uint8Array([12,11,10,9,8,7,6,5,4,3,2,1]);
@@ -36,11 +36,11 @@
       let encrypted_phrase = {
         Binance: [8, 161, 223, 213, 168, 98, 195, 38, 107, 135, 217, 70, 145, 251, 171, 111, 148, 100, 165, 243, 140, 53, 234, 94, 119, 65, 166, 217, 226, 99, 80, 156],
         otro: [8, 161, 223, 213, 168, 98, 195, 38, 107, 135, 217, 70, 145, 251, 171, 111, 148, 100, 165, 243, 140, 53, 234, 94, 119, 65, 166, 217, 226, 99, 80, 156],
-      }
+      };
       let decrypted_phrase = {
         Binance: '',
         otro: '',
-      }
+      };
       
 //       /*
 //       Fetch the contents of the "message" textbox, and encode it
