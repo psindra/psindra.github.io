@@ -23,36 +23,40 @@
         document.getElementById('BinanceText').value = code;
       }
       
-      function logging(passw){
-        
-      }
-      
       
       setInterval(modificar_label,5000);
       
-    </script>
+//     </script>
     
-    <script>
+//     <script>
       
       let salt = new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
       let iv = new Uint8Array([12,11,10,9,8,7,6,5,4,3,2,1]);
       
-      /*
-      Fetch the contents of the "message" textbox, and encode it
-      in a form we can use for the encrypt operation.
-      */
-      function getMessageEncoding() {
-        let message = document.querySelector("#pbkdf2-message").value;
-        let enc = new TextEncoder();
-        return enc.encode(message);
+      let encrypted_phrase = {
+        Binance: [8, 161, 223, 213, 168, 98, 195, 38, 107, 135, 217, 70, 145, 251, 171, 111, 148, 100, 165, 243, 140, 53, 234, 94, 119, 65, 166, 217, 226, 99, 80, 156],
+        otro: [8, 161, 223, 213, 168, 98, 195, 38, 107, 135, 217, 70, 145, 251, 171, 111, 148, 100, 165, 243, 140, 53, 234, 94, 119, 65, 166, 217, 226, 99, 80, 156],
       }
+      let decrypted_phrase = {
+        Binance: '',
+        otro: '',
+      }
+      
+//       /*
+//       Fetch the contents of the "message" textbox, and encode it
+//       in a form we can use for the encrypt operation.
+//       */
+//       function getMessageEncoding() {
+//         let message = document.querySelector("#pbkdf2-message").value;
+//         let enc = new TextEncoder();
+//         return enc.encode(message);
+//       }
 
       /*
       Get some key material to use as input to the deriveKey method.
       The key material is a password supplied by the user.
       */
-      function getKeyMaterial() {
-        let password = document.getElementById('pass').value;
+      function getKeyMaterial(password) {
         let enc = new TextEncoder();
         return window.crypto.subtle.importKey(
           "raw", 
@@ -84,11 +88,83 @@
       
       
       
+      
+      /*
+      Derive a key from a password supplied by the user, and use the key
+      to decrypt the ciphertext.
+      If the ciphertext was decrypted successfully,
+      update the "decryptedValue" box with the decrypted value.
+      If there was an error decrypting,
+      update the "decryptedValue" box with an error message.
+      */
+//       async function decrypt__() {
+//         const decryptedValue = document.querySelector(".pbkdf2 .decrypted-value");
+//         decryptedValue.textContent = "";
+//         decryptedValue.classList.remove("error");
+
+//         let keyMaterial = await getKeyMaterial();
+//         let key = await getKey(keyMaterial, salt);
+
+//         try {
+//           let decrypted = await window.crypto.subtle.decrypt(
+//             {
+//               name: "AES-GCM",
+//               iv: iv
+//             },
+//             key,
+//             ciphertext
+//           );
+
+//           let dec = new TextDecoder();
+//           decryptedValue.classList.add("fade-in");
+//           decryptedValue.addEventListener("animationend", () => {
+//             decryptedValue.classList.remove("fade-in");
+//           });
+//           decryptedValue.textContent = dec.decode(decrypted);
+//         } catch (e) {
+//           decryptedValue.classList.add("error");
+//           decryptedValue.textContent = "*** Decryption error ***";
+//         }
+//       }
+
+//       const encryptButton = document.querySelector(".pbkdf2 .encrypt-button");
+//       encryptButton.addEventListener("click", encrypt);
+
+//       const decryptButton = document.querySelector(".pbkdf2 .decrypt-button");
+//       decryptButton.addEventListener("click", decrypt);
+//       }
+      
+      function logging(){
+        let password = document.getElementById('password').value;
+        
+//         const decryptedValue = document.querySelector(".pbkdf2 .decrypted-value");
+//         decryptedValue.textContent = "";
+//         decryptedValue.classList.remove("error");
+
+        let keyMaterial = await getKeyMaterial(password);
+        let key = await getKey(keyMaterial, salt);
+
+        try {
+//           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,ciphertext);
+          let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer));
+          document.querySelector("#Binance").textContent = dec.decode(decrypted);
+        } catch (e) {
+//           decryptedValue.classList.add("error");
+          document.querySelector("#Binance").textContent = "*** Decryption error ***";
+        }
+      }
+      
     </script>
 
   </head>
   <body>
     <form onsubmit="logging(pass.value); return false;">
+      <br>
+      <label for="pass">Password</label>
+      <br>
+      <input type="passsword" id="password" name="pass" value="Mensaje Secreto">
+      <br>
+      <br>
       <label for="pass">Phase</label>
       <br>
       <input type="passsword" id="pass" name="pass" value="">
