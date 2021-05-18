@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script type="text/javascript">
+        // window.otplib.authenticator
+        // window.otplib.hotp
+        // window.otplib.totp
+      
+      let encrypted_tokens = { Binance: 'PBTRL4N3CW4B37LZ', otros:'PBTRL4N3CW4B37LZ',};
+      let decrypted_tokens = { Binance: '', otros:'',};
+      
+      function calcular_() {
+        pass = document.getElementById('Binancekeytxt').value;
+        result_ = otplib.authenticator.generate(pass);
+        document.getElementById('BinanceResultText').innerText = result_;
+      }
+      
+      
+      function calcular_code(secret) {
+        result_ = otplib.authenticator.generate(secret);
+        return result_;
+      }
+      
+      function modificar_label(){
+        code = calcular_code(document.getElementById('Binancekeytxt').value);
+        document.getElementById('BinanceResultText').value = code;
+      }
+      
+      function logging(){
+        let password = document.getElementById('password').value;
+        for (index in encrypted_tokens) {
+          decrypted_tokens[index] = CryptoJS.AES.decrypt(encrypted_tokens[index], "Mensaje Secreto").toString(CryptoJS.enc.Utf8)
+        }
+      }
+      
+      
+      setInterval(modificar_label,5000);
+      
+    </script>
+  </head>
+  <body>
+    <form onsubmit="logging(); return false;">
+      <br>
+      <label for="pass">Password</label>
+      <br>
+      <input type="passsword" id="password" name="password" value="Mensaje Secreto">
+      <br><br>
+      <input type="submit" value="Log">
+    </form>
+    <br>
+    <br>
+    <label for="Binancetoken">Binance</label>
+    <br>
+    <input type="text" id="Binancetokentxt" name="Binancetokentxt" value="">
+    <br>
+    <br>
+    <label for="Binancekey">Binance key</label>
+    <br>
+    <input type="text" id="Binancekeytxt" name="Binancekeytxt" value="">
+    <br>
+    <br>
+<!--       <label id='result' for="lname">Result</label> -->
+<!--       <input type="text" id="lname" name="lname" value="Doe"> -->
+    
+    <div>
+      <div>
+        <label id="Binance" value="Binance Label"> Binance Inner text</label>
+        <input type="text" id="BinanceResultText" value="" readonnly>  <br>  <br>
+        
+        
+      </div>
+    </div>
+    
+    
+  </body>
+</html>
