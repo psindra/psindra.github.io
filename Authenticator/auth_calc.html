@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
+    <script type="text/javascript">
+        // window.otplib.authenticator
+        // window.otplib.hotp
+        // window.otplib.totp
+      function calcular_() {
+        pass = document.getElementById('pass').value;
+        result_ = otplib.authenticator.generate(pass);
+        document.getElementById('result').innerText = result_;
+      }
+      
+      
+      function calcular_code(secret) {
+        result_ = otplib.authenticator.generate(secret);
+        return result_;
+      }
+      
+      function modificar_label(){
+        code = calcular_code(document.getElementById('pass').value);
+        document.getElementById('BinanceText').value = code;
+      }
+      
+      function logging(passw){
+        
+      }
+      
+      
+      setInterval(modificar_label,5000);
+      
+    </script>
+    
+    <script>
+      /*
+      Fetch the contents of the "message" textbox, and encode it
+      in a form we can use for the encrypt operation.
+      */
+      function getMessageEncoding() {
+        let message = document.querySelector("#pbkdf2-message").value;
+        let enc = new TextEncoder();
+        return enc.encode(message);
+      }
+
+      /*
+      Get some key material to use as input to the deriveKey method.
+      The key material is a password supplied by the user.
+      */
+      function getKeyMaterial() {
+        let password = window.prompt("Enter your password");
+        let enc = new TextEncoder();
+        return window.crypto.subtle.importKey(
+          "raw", 
+          enc.encode(password), 
+          {name: "PBKDF2"}, 
+          false, 
+          ["deriveBits", "deriveKey"]
+        );
+      }
+
+      /*
+      Given some key material and some random salt
+      derive an AES-GCM key using PBKDF2.
+      */
+      function getKey(keyMaterial, salt) {
+        return window.crypto.subtle.deriveKey(
+          {
+            "name": "PBKDF2",
+            salt: salt, 
+            "iterations": 100000,
+            "hash": "SHA-256"
+          },
+          keyMaterial,
+          { "name": "AES-GCM", "length": 256},
+          true,
+          [ "encrypt", "decrypt" ]
+        );
+      }
+      
+    </script>
+
+  </head>
+  <body>
+    <form onsubmit="logging(pass.value); return false;">
+      <label for="pass">Phase</label>
+      <br>
+      <input type="passsword" id="pass" name="pass" value="">
+      <br>
+<!--       <label id='result' for="lname">Result</label> -->
+      <br>
+<!--       <input type="text" id="lname" name="lname" value="Doe"> -->
+      <br><br>
+      <input type="submit" value="Log">
+    </form>
+    
+    <div>
+      <div>
+        <label id="Binance" value="Binance Label"> Binance Inner text</label>
+        <input type="text" id="BinanceText" value="" readonnly>  <br>  <br>
+        
+        
+      </div>
+    </div>
+    
+    
+    
+  </body>
+</html>
