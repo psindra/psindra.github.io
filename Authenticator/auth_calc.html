@@ -138,6 +138,10 @@
         console.info("encrypted_phrase.Binance: "+new Uint8Array(encrypted_phrase.Binance));
         new TextDecoder().decode(await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer));
         console.info("decode: " + new TextDecoder().decode(await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer)));
+        try {
+          document.querySelector("#Binance").textContent = new TextDecoder().decode(await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer));
+        } catch(e) {};
+        
 //         try {
 // //           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,ciphertext);
 //           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer);
