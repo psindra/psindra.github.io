@@ -133,22 +133,19 @@
       
       async function logging(){
         let password = document.getElementById('password').value;
-        
-//         const decryptedValue = document.querySelector(".pbkdf2 .decrypted-value");
-//         decryptedValue.textContent = "";
-//         decryptedValue.classList.remove("error");
-
         let keyMaterial = await getKeyMaterial(password);
         let key = await getKey(keyMaterial, salt);
-
-        try {
-//           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,ciphertext);
-          let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer);
-          document.querySelector("#Binance").textContent = dec.decode(decrypted);
-        } catch (e) {
-//           decryptedValue.classList.add("error");
-          document.querySelector("#Binance").textContent = "*** Decryption error ***";
-        }
+        console.info("encrypted_phrase.Binance: "+new Uint8Array(encrypted_phrase.Binance));
+        new TextDecoder().decode(await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer));
+        console.info("decode: " + new TextDecoder().decode(await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer)));
+//         try {
+// //           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,ciphertext);
+//           let decrypted = await window.crypto.subtle.decrypt({name: "AES-GCM",iv: iv},key,new Uint8Array(encrypted_phrase.Binance).buffer);
+//           document.querySelector("#Binance").textContent = dec.decode(decrypted);
+//         } catch (e) {
+// //           decryptedValue.classList.add("error");
+//           document.querySelector("#Binance").textContent = "*** Decryption error ***";
+//         }
       }
       
     </script>
