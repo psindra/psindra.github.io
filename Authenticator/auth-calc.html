@@ -28,11 +28,16 @@
         document.getElementById('BinanceResultText').value = code;
       }
       
+      function modificar_token(token){
+        document.getElementById('Binancetokentxt').value = token;
+      }
+        
       function logging(){
         let password = document.getElementById('password').value;
         for (index in encrypted_tokens) {
-          decrypted_tokens[index] = CryptoJS.AES.decrypt(encrypted_tokens[index], "Mensaje Secreto").toString(CryptoJS.enc.Utf8)
+          decrypted_tokens[index] = CryptoJS.AES.decrypt(encrypted_tokens[index], "Mensaje Secreto").toString(CryptoJS.enc.Utf8);
         }
+        modificar_token(decrypted_tokens["Binance"]);
       }
       
       
