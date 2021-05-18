@@ -9,7 +9,10 @@
         // window.otplib.totp
       
       let encrypted_tokens = { Binance: 'U2FsdGVkX1822Pap197u/q+SRAxYqYWMRrDEoCPtQfMq6qZ0hqvIyZoDuJQ07hvt', otros:'',};
-      let decrypted_tokens = { Binance: '', otros:'',};
+      let decrypted_tokens = {};
+      for(index in encrypted_tokens) {        decrypted_tokens[index] = '';      }
+        
+      
       
       function calcular_() {
         pass = document.getElementById('Binancekeytxt').value;
@@ -59,7 +62,6 @@
     <br>
     <br>
     <label for="Binancetoken">Binance</label>
-    <br>
     <input type="text" id="Binancetokentxt" name="Binancetokentxt" value="">
     <br>
     <br>
