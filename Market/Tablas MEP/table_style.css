@@ -1,0 +1,11 @@
+/* [COSMETICS - DOES NOT MATTER] */
+html, body {
+  font-family: arial;
+}
+table {
+  border-collapse: collapse;
+}
+table tr td {
+  border: 1px solid #000;
+  padding: 10px;
+}
