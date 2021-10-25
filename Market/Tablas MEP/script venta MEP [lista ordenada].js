@@ -45,3 +45,4 @@ extracto.forEach(ticker=>{
 })
 lista_ordenada.sort((a,b)=>{return b[1]-a[1]});
 console.info(lista_ordenada);
+export {lista_ordenada};
