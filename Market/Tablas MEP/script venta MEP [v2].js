@@ -7,7 +7,7 @@
 
 async function listarCEDEARS(){
     window.aa_json =''
-    await (await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears"))
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
         .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
     ss = []
     window.aa_json.result.forEach(elemento=>{
