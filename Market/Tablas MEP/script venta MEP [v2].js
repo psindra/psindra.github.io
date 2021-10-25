@@ -5,7 +5,7 @@
 // // https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634921905336&term=1&index=cedears&sortColumn=ticker&isAscending=true
 // aa_json = bar.json().then(resp=>{return resp});
 
-async function listarCEDEARS(){
+ function async listarCEDEARS(){
     window.aa_json =''
     await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears")
         .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
@@ -39,6 +39,9 @@ async function generarListaOrdenada(){
     // let i=0
     // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
     // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
+    window.aa_json =''
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPricesterm=1&index=cedears")
+        .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
     
     
     lista_ordenada = []
