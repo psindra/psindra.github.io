@@ -40,7 +40,7 @@ async function generarListaOrdenada(){
     // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
     // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
     window.aa_json =''
-    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPricesterm=1&index=cedears")
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=1&index=cedears")
         .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
     
     
