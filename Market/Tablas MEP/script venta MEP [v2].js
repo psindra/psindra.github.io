@@ -87,6 +87,9 @@ async function generarTabla(){
 // generarListaOrdenada();
 // generarTabla();
 
+
+//  POR ALGUNA RAZÓN RARA LOS "await" NO PUEDEN ESTAR EN FUNCIONES "PRINCIPALES" EN LOS SCRIPT ADJUNTADOS EN 
+// UN HTML 🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️      -->  ENTONCES LOS PONGO EN FUNCIONES "ANIDADAS"
 async function funcionTotal(){
     if (typeof extracto == 'undefined'){
         await listarCEDEARS();
