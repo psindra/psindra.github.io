@@ -22,11 +22,8 @@ async function listarCEDEARS(){
     //     total[i] = [ss[i],ss_valida[i]]
         total[i] = [ss[i]]
     }
-}
 
-///////////////////////////////////////////////////////////////////////////////////////////////
 
-async function obtenerCotizaciones(){
     window.extracto = []
     for (let i = 0; i < ss.length; i++) {
 //     for (let i = 0; i < 15; i++) {
@@ -35,8 +32,8 @@ async function obtenerCotizaciones(){
 
     }
 }
-// 
 
+// ///////////////////////////////////////////////////////////////////////////////////////////////
 
 async function generarListaOrdenada(){
     // let i=0
@@ -81,6 +78,5 @@ async function generarTabla(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 typeof extracto == 'undefined' ? await listarCEDEARS() : null;
-await obtenerCotizaciones();
 await generarListaOrdenada();
 await generarTabla();
