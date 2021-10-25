@@ -18,7 +18,7 @@ for (let i = 0; i < ss.length; i++) {
     total[i] = [ss[i]]
 }
 
-let extracto = []
+extracto = []
 for (let i = 0; i < ss.length; i++) {
 //     total[i][1] = (await(await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D")).status) == 200 ? '✅' : null
     (await(fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
