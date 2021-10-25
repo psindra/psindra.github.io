@@ -59,12 +59,11 @@ async function generarListaOrdenada(){
 async function generarTabla(){
     tabla = document.createElement('table');
     document.body.appendChild(tabla);
-
     row = tabla.insertRow();
-
     cell = row.insertCell();
-
     cell.innerText = "©polyys";
+    cell = row.insertCell();
+    cell.innerText = "Precio Venta MEP Cotización CEDEAR (No Parking)";
 
     lista_ordenada.forEach(elemento=> {
       row = tabla.insertRow();
