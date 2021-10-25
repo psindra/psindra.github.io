@@ -81,5 +81,5 @@ async function generarTabla(){
 if (typeof extracto == 'undefined'){
     listarCEDEARS();
 }
-await generarListaOrdenada();
-await generarTabla();
+generarListaOrdenada();
+generarTabla();
