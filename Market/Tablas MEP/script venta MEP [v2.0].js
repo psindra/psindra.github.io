@@ -3,7 +3,7 @@ bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPri
 // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
 // Contado Inmediato
 // https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634921905336&term=1&index=cedears&sortColumn=ticker&isAscending=true
-aa_json = await (bar.json());
+aa_json = bar.json().then(resp=>{return resp});
 ss = []
 aa_json.result.forEach(elemento=>{
     ss.push(elemento.ticker);
