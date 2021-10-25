@@ -1,9 +1,9 @@
 bar = ""
-bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears")
+bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
 // Contado Inmediato
 // https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634921905336&term=1&index=cedears&sortColumn=ticker&isAscending=true
-aa_json = await (await bar).json();
+aa_json = await (bar.json());
 ss = []
 aa_json.result.forEach(elemento=>{
     ss.push(elemento.ticker);
