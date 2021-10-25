@@ -21,7 +21,7 @@ for (let i = 0; i < ss.length; i++) {
 let extracto = []
 for (let i = 0; i < ss.length; i++) {
 //     total[i][1] = (await(await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D")).status) == 200 ? '✅' : null
-    (await(await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D")).status) == 200 ? 
+    (await(fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
     (total[i].push('✅') & extracto.push(ss[i]) ) : null
 
 }
