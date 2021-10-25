@@ -78,6 +78,8 @@ async function generarTabla(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-(typeof extracto == 'undefined') ? await listarCEDEARS() : null;
+if (typeof extracto == 'undefined'){
+    await listarCEDEARS();
+}
 await generarListaOrdenada();
 await generarTabla();
