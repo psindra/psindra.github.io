@@ -81,8 +81,18 @@ async function generarTabla(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if (typeof extracto == 'undefined'){
-    listarCEDEARS();
+// if (typeof extracto == 'undefined'){
+//     listarCEDEARS();
+// }
+// generarListaOrdenada();
+// generarTabla();
+
+async function funcionTotal(){
+    if (typeof extracto == 'undefined'){
+        await listarCEDEARS();
+    }
+    await generarListaOrdenada();
+    await generarTabla();
 }
-generarListaOrdenada();
-generarTabla();
+
+funcionTotal();
