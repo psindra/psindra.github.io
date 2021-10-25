@@ -22,18 +22,21 @@ async function listarCEDEARS(){
     //     total[i] = [ss[i],ss_valida[i]]
         total[i] = [ss[i]]
     }
+}
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+async function obtenerCotizaciones(){
     window.extracto = []
     for (let i = 0; i < ss.length; i++) {
 //     for (let i = 0; i < 15; i++) {
-    //     total[i][1] = (await(await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D")).status) == 200 ? '✅' : null
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extracto.push(ss[i]) ) : null
 
     }
-//     globalThis.extracto
 }
-// ///////////////////////////////////////////////////////////////////////////////////////////////
+// 
+
 
 async function generarListaOrdenada(){
     // let i=0
@@ -78,5 +81,6 @@ async function generarTabla(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 typeof extracto == 'undefined' ? await listarCEDEARS() : null;
+await obtenerCotizaciones();
 await generarListaOrdenada();
 await generarTabla();
