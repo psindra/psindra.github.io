@@ -25,10 +25,11 @@ async function listarCEDEARS(){
 
 
     window.extracto = []
-    window.document.body.innerHTML = "<h3> Cargando....</h3>"
+    window.document.body.innerHTML = "<h3> Cargando</h3>"
     for (let i = 0; i < ss.length; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extracto.push(ss[i]) ) : null
+        window.document.body.innerHTML + = "."
 
     }
 }
