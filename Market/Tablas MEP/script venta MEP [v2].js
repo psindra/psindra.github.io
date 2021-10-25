@@ -69,15 +69,15 @@ async function generarTabla(){
     for (elemento in lista_ordenada) {
       row = tabla.insertRow()
       cell = row.insertCell()
-      cell.innerText = lista_ordenada[0]
+      cell.innerText = elemento[0]
       cell = row.insertCell()
-      cell.innerText = "AR$ " + lista_ordenada[1]
+      cell.innerText = "AR$ " + elemento[1]
     }
     document.body.appendChild(tabla)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-listarCEDEARS();
-generarListaOrdenada();
-generarTabla();
+await listarCEDEARS();
+await generarListaOrdenada();
+await generarTabla();
