@@ -63,7 +63,7 @@ async function generarTabla(){
     cell = row.insertCell();
     cell.innerText = "©polyys";
     cell = row.insertCell();
-    cell.innerText = "Precio Venta MEP Cotización CEDEAR (No Parking)";
+    cell.innerText = "Precio Venta MEP Cotización CEDEAR (Cdo - No Parking)";
 
     lista_ordenada.forEach(elemento=> {
       row = tabla.insertRow();
