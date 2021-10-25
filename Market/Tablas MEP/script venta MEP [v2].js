@@ -57,27 +57,27 @@ async function generarListaOrdenada(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function generarTabla(){
-    tabla = document.createElement('table')
-    document.body.appendChild(tabla)
+    tabla = document.createElement('table');
+    document.body.appendChild(tabla);
 
-    row = tabla.insertRow()
+    row = tabla.insertRow();
 
-    cell = row.insertCell()
+    cell = row.insertCell();
 
-    cell.innerText = "©polyys"
+    cell.innerText = "©polyys";
 
-    for (elemento in lista_ordenada) {
-      row = tabla.insertRow()
-      cell = row.insertCell()
-      cell.innerText = elemento[0]
-      cell = row.insertCell()
-      cell.innerText = "AR$ " + elemento[1]
-    }
+    lista_ordenada.forEach(elemento=> {
+      row = tabla.insertRow();
+      cell = row.insertCell();
+      cell.innerHTML = "<strong>" + elemento[0] + "</strong>";
+      cell = row.insertCell();
+      cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
+    })
     document.body.appendChild(tabla)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-await listarCEDEARS();
+typeof extracto == 'undefined' ? await listarCEDEARS() : null;
 await generarListaOrdenada();
 await generarTabla();
