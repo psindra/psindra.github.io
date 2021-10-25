@@ -25,6 +25,7 @@ async function listarCEDEARS(){
 
 
     window.extracto = []
+    window.document.body.innerHTML = "<h3> Cargando....</h3>"
     for (let i = 0; i < ss.length; i++) {
 //     for (let i = 0; i < 15; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
@@ -72,6 +73,7 @@ async function generarTabla(){
       cell = row.insertCell();
       cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
     })
+    window.document.body=document.createElement("body")
     document.body.appendChild(tabla)
 }
 
