@@ -56,11 +56,11 @@ async function listarON(){
     }
 
 
-//     window.extracto = []
+    window.extractoON = []
     window.document.body.innerHTML = "<h3> Cargando</h3>"
     for (let i = 0; i < ss.length; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
-        (total[i].push('✅') & window.extracto.push(ss[i]) ) : null
+        (total[i].push('✅') & window.extractoON.push(ss[i]) ) : null
         document.body.firstElementChild.innerText += "."
 
     }
@@ -94,8 +94,8 @@ async function generarListaOrdenadaCEDEARS(){
 
 async function generarListaOrdenadaON(){
     // let i=0
-    // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
-    // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
+    // aa_json.result.find(elem=>elem.ticker==extractoON[i]).stockOffer.bidTop[0].price /
+    // aa_json.result.find(elem=>elem.ticker==extractoON[i]+"D").stockOffer.askTop[0].price
     window.aa_json =''
     await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=1&index=obligacionesNegociables")
         .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
@@ -103,7 +103,7 @@ async function generarListaOrdenadaON(){
     
     
     lista_ordenadaON = []
-    extracto.forEach(ticker=>{
+    extractoON.forEach(ticker=>{
         cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
                                         aa_json.result.find(elem=>elem.ticker==ticker+"D")?.stockOffer?.askTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
