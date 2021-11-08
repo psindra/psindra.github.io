@@ -105,7 +105,7 @@ async function generarListaOrdenadaON(){
     lista_ordenadaON = []
     extractoON.forEach(ticker=>{
         cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
-                                        aa_json.result.find(elem=>elem.ticker==ticker+"D")?.stockOffer?.askTop[0]?.price;
+                                        aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.askTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
         if(!isNaN(cotizacion_resultante)){
             lista_ordenadaON.push([ticker, cotizacion_resultante])
