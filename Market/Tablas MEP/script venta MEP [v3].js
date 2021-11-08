@@ -117,6 +117,31 @@ async function generarListaOrdenadaON(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+async function generarListaOrdenadaON48(){
+    // let i=0
+    // aa_json.result.find(elem=>elem.ticker==extractoON[i]).stockOffer.bidTop[0].price /
+    // aa_json.result.find(elem=>elem.ticker==extractoON[i]+"D").stockOffer.askTop[0].price
+    window.aa_json =''
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=obligacionesNegociables")
+        .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
+    
+    
+    
+    lista_ordenadaON48 = []
+    extractoON.forEach(ticker=>{
+        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
+                                        aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.askTop[0]?.price;
+        console.info(ticker + " => " + cotizacion_resultante);
+        if(!isNaN(cotizacion_resultante)){
+            lista_ordenadaON48.push([ticker, cotizacion_resultante])
+        }
+    })
+    lista_ordenadaON48.sort((a,b)=>{return b[1]-a[1]});
+    console.info(lista_ordenadaON48);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 async function generarTabla(){
     ddiv = document.createElement('div');
     ddiv.style.display = 'flex';
@@ -154,6 +179,24 @@ async function generarTabla(){
     })
     
     
+    
+    
+    tabla = document.createElement('table');
+    ddiv.appendChild(tabla);
+    row = tabla.insertRow();
+    cell = row.insertCell();
+    cell.innerText = "©polyys";
+    cell = row.insertCell();
+    cell.innerText = "Precio Venta MEP Cotización ON 48hs (Cdo - No Parking)";
+    lista_ordenadaON48.forEach(elemento=> {
+      row = tabla.insertRow();
+      cell = row.insertCell();
+      cell.innerHTML = "<strong>" + elemento[0] + "</strong>";
+      cell = row.insertCell();
+      cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
+    })
+    
+    
     window.document.body=document.createElement("body")
     document.body.appendChild(ddiv)
 }
@@ -176,6 +219,7 @@ async function funcionTotal(){
     }
     await generarListaOrdenadaCEDEARS();
     await generarListaOrdenadaON();
+    await generarListaOrdenadaON48();
     await generarTabla();
 }
 
