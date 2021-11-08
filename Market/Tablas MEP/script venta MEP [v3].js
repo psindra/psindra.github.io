@@ -36,7 +36,39 @@ async function listarCEDEARS(){
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////
 
-async function generarListaOrdenada(){
+
+async function listarON(){
+    window.aa_json =''
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=obligacionesNegociables")
+        .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
+    ss = []
+    window.aa_json.result.forEach(elemento=>{
+        ss.push(elemento.ticker);
+    })
+
+    ss_valida = []
+
+    total = [[]]
+
+    for (let i = 0; i < ss.length; i++) {
+    //     total[i] = [ss[i],ss_valida[i]]
+        total[i] = [ss[i]]
+    }
+
+
+//     window.extracto = []
+    window.document.body.innerHTML = "<h3> Cargando</h3>"
+    for (let i = 0; i < ss.length; i++) {
+        ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
+        (total[i].push('✅') & window.extracto.push(ss[i]) ) : null
+        document.body.firstElementChild.innerText += "."
+
+    }
+}
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////
+
+async function generarListaOrdenadaCEDEARS(){
     // let i=0
     // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
     // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
@@ -60,15 +92,43 @@ async function generarListaOrdenada(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+async function generarListaOrdenadaON(){
+    // let i=0
+    // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
+    // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
+    window.aa_json =''
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=1&index=obligacionesNegociables")
+        .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
+    
+    
+    
+    lista_ordenadaON = []
+    extracto.forEach(ticker=>{
+        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
+                                        aa_json.result.find(elem=>elem.ticker==ticker+"D")?.stockOffer?.askTop[0]?.price;
+        console.info(ticker + " => " + cotizacion_resultante);
+        if(!isNaN(cotizacion_resultante)){
+            lista_ordenadaON.push([ticker, cotizacion_resultante])
+        }
+    })
+    lista_ordenadaON.sort((a,b)=>{return b[1]-a[1]});
+    console.info(lista_ordenadaON);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 async function generarTabla(){
+    ddiv = document.createElement('div');
+    ddiv.style.display = 'flex';
+//     document.body.appendChild(ddiv);    
+    
     tabla = document.createElement('table');
-    document.body.appendChild(tabla);
+    ddiv.appendChild(tabla);
     row = tabla.insertRow();
     cell = row.insertCell();
     cell.innerText = "©polyys";
     cell = row.insertCell();
     cell.innerText = "Precio Venta MEP Cotización CEDEAR (Cdo - No Parking)";
-
     lista_ordenada.forEach(elemento=> {
       row = tabla.insertRow();
       cell = row.insertCell();
@@ -76,8 +136,26 @@ async function generarTabla(){
       cell = row.insertCell();
       cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
     })
+    
+    
+    tabla = document.createElement('table');
+    ddiv.appendChild(tabla);
+    row = tabla.insertRow();
+    cell = row.insertCell();
+    cell.innerText = "©polyys";
+    cell = row.insertCell();
+    cell.innerText = "Precio Venta MEP Cotización ON (Cdo - No Parking)";
+    lista_ordenadaON.forEach(elemento=> {
+      row = tabla.insertRow();
+      cell = row.insertCell();
+      cell.innerHTML = "<strong>" + elemento[0] + "</strong>";
+      cell = row.insertCell();
+      cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
+    })
+    
+    
     window.document.body=document.createElement("body")
-    document.body.appendChild(tabla)
+    document.body.appendChild(ddiv)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,8 +172,10 @@ async function generarTabla(){
 async function funcionTotal(){
     if (typeof extracto == 'undefined'){
         await listarCEDEARS();
+        await listarON();
     }
-    await generarListaOrdenada();
+    await generarListaOrdenadaCEDEARS();
+    await generarListaOrdenadaON();
     await generarTabla();
 }
 
