@@ -92,6 +92,30 @@ async function generarListaOrdenadaCEDEARS(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+async function generarListaOrdenadaCEDEARS48(){
+    // let i=0
+    // aa_json.result.find(elem=>elem.ticker==extracto[i]).stockOffer.bidTop[0].price /
+    // aa_json.result.find(elem=>elem.ticker==extracto[i]+"D").stockOffer.askTop[0].price
+    window.aa_json =''
+    await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
+        .then(respuesta=>{return respuesta.json()}).then(respuesta=>{window.aa_json=respuesta})
+    
+    
+    lista_ordenada48 = []
+    extracto.forEach(ticker=>{
+        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
+                                        aa_json.result.find(elem=>elem.ticker==ticker+"D")?.stockOffer?.askTop[0]?.price;
+        console.info(ticker + " => " + cotizacion_resultante);
+        if(!isNaN(cotizacion_resultante)){
+            lista_ordenada48.push([ticker, cotizacion_resultante])
+        }
+    })
+    lista_ordenada48.sort((a,b)=>{return b[1]-a[1]});
+    console.info(lista_ordenada48);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 async function generarListaOrdenadaON(){
     // let i=0
     // aa_json.result.find(elem=>elem.ticker==extractoON[i]).stockOffer.bidTop[0].price /
@@ -148,7 +172,7 @@ async function generarTabla(){
 //     document.body.appendChild(ddiv);    
     
     tabla = document.createElement('table');
-    ddiv.appendChild(tabla);
+    ddiv.appendChild(document.createElement('div')).appendChild(tabla);
     row = tabla.insertRow();
     cell = row.insertCell();
     cell.innerText = "©polyys";
@@ -162,9 +186,24 @@ async function generarTabla(){
       cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
     })
     
+    tabla = document.createElement('table');
+    ddiv.appendChild(document.createElement('div')).appendChild(tabla);
+    row = tabla.insertRow();
+    cell = row.insertCell();
+    cell.innerText = "©polyys";
+    cell = row.insertCell();
+    cell.innerText = "Precio Venta MEP Cotización CEDEAR (48Hs - No Parking)";
+    lista_ordenada48.forEach(elemento=> {
+      row = tabla.insertRow();
+      cell = row.insertCell();
+      cell.innerHTML = "<strong>" + elemento[0] + "</strong>";
+      cell = row.insertCell();
+      cell.innerHTML = "AR$ <strong>" + elemento[1].toFixed(2) + "</strong>";
+    })
+    
     
     tabla = document.createElement('table');
-    ddiv.appendChild(tabla);
+    ddiv.appendChild(document.createElement('div')).appendChild(tabla);
     row = tabla.insertRow();
     cell = row.insertCell();
     cell.innerText = "©polyys";
@@ -182,12 +221,12 @@ async function generarTabla(){
     
     
     tabla = document.createElement('table');
-    ddiv.appendChild(tabla);
+    ddiv.appendChild(document.createElement('div')).appendChild(tabla);
     row = tabla.insertRow();
     cell = row.insertCell();
     cell.innerText = "©polyys";
     cell = row.insertCell();
-    cell.innerText = "Precio Venta MEP Cotización ON 48hs (Cdo - No Parking)";
+    cell.innerText = "Precio Venta MEP Cotización ON  (48hs - No Parking)";
     lista_ordenadaON48.forEach(elemento=> {
       row = tabla.insertRow();
       cell = row.insertCell();
@@ -218,6 +257,7 @@ async function funcionTotal(){
         await listarON();
     }
     await generarListaOrdenadaCEDEARS();
+    await generarListaOrdenadaCEDEARS48();
     await generarListaOrdenadaON();
     await generarListaOrdenadaON48();
     await generarTabla();
