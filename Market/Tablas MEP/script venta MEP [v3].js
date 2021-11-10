@@ -1,4 +1,4 @@
-version = "3.1.1"
+version = "3.1.2"
 // bar = ""
 // bar =await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
@@ -170,7 +170,7 @@ async function generarListaOrdenadaON48(){
 async function generarTabla(){
     ddiv = document.createElement('div');
     ddiv.style.display = 'flex';
-    ddiv.style.justify-content = 'space-between';  
+    ddiv.style.justifyContent = 'space-between';
     
     tabla = document.createElement('table');
     ddiv.appendChild(document.createElement('div')).appendChild(tabla);
