@@ -1,4 +1,4 @@
-version = "3.1.2"
+version = "3.1.3"
 // bar = ""
 // bar =await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
@@ -60,7 +60,7 @@ async function listarON(){
     window.extractoON = []
     window.document.body.innerHTML = "<h3> Cargando ON [v" + version + "]</h3>"
     for (let i = 0; i < ss.length; i++) {
-        ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
+        ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Acciones/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extractoON.push(ss[i]) ) : null
         document.body.firstElementChild.innerText += "."
 
@@ -129,7 +129,7 @@ async function generarListaOrdenadaON(){
     
     lista_ordenadaON = []
     extractoON.forEach(ticker=>{
-        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
+        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"O")?.stockOffer?.bidTop[0]?.price /
                                         aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.askTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
         if(!isNaN(cotizacion_resultante)){
@@ -154,7 +154,7 @@ async function generarListaOrdenadaON48(){
     
     lista_ordenadaON48 = []
     extractoON.forEach(ticker=>{
-        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker)?.stockOffer?.bidTop[0]?.price /
+        cotizacion_resultante = aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"O")?.stockOffer?.bidTop[0]?.price /
                                         aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.askTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
         if(!isNaN(cotizacion_resultante)){
