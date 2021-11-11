@@ -1,4 +1,4 @@
-version = "3.1.3.1"
+version = "3.1.4"
 // bar = ""
 // bar =await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
@@ -60,7 +60,7 @@ async function listarON(){
     window.extractoON = []
     window.document.body.innerHTML = "<h3> Cargando ON [v" + version + "]</h3>"
     for (let i = 0; i < ss.length; i++) {
-        ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/cedears/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
+        ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Acciones/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extractoON.push(ss[i]) ) : null
         document.body.firstElementChild.innerText += "."
 
@@ -133,7 +133,7 @@ async function generarListaOrdenadaON(){
                                         aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.bidTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
         if(!isNaN(cotizacion_resultante)){
-            lista_ordenadaON.push([ticker, cotizacion_resultante])
+            lista_ordenadaON.push([ticker.slice(0, -1) +"_", cotizacion_resultante])
         }
     })
     lista_ordenadaON.sort((a,b)=>{return a[1]-b[1]});
@@ -158,7 +158,7 @@ async function generarListaOrdenadaON48(){
                                         aa_json.result.find(elem=>elem.ticker==ticker.slice(0, -1) +"D")?.stockOffer?.bidTop[0]?.price;
         console.info(ticker + " => " + cotizacion_resultante);
         if(!isNaN(cotizacion_resultante)){
-            lista_ordenadaON48.push([ticker, cotizacion_resultante])
+            lista_ordenadaON48.push([ticker.slice(0, -1) +"_", cotizacion_resultante])
         }
     })
     lista_ordenadaON48.sort((a,b)=>{return a[1]-b[1]});
