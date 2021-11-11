@@ -1,4 +1,4 @@
-version = "3.1.2"
+version = "3.1.2.1"
 // bar = ""
 // bar =await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
@@ -87,7 +87,7 @@ async function generarListaOrdenadaCEDEARS(){
             lista_ordenada.push([ticker, cotizacion_resultante])
         }
     })
-    lista_ordenada.sort((a,b)=>{return b[1]-a[1]});
+    lista_ordenada.sort((a,b)=>{return a[1]-b[1]});
     console.info(lista_ordenada);
 }
 
@@ -111,7 +111,7 @@ async function generarListaOrdenadaCEDEARS48(){
             lista_ordenada48.push([ticker, cotizacion_resultante])
         }
     })
-    lista_ordenada48.sort((a,b)=>{return b[1]-a[1]});
+    lista_ordenada48.sort((a,b)=>{return a[1]-b[1]});
     console.info(lista_ordenada48);
 }
 
@@ -136,7 +136,7 @@ async function generarListaOrdenadaON(){
             lista_ordenadaON.push([ticker, cotizacion_resultante])
         }
     })
-    lista_ordenadaON.sort((a,b)=>{return b[1]-a[1]});
+    lista_ordenadaON.sort((a,b)=>{return a[1]-b[1]});
     console.info(lista_ordenadaON);
 }
 
@@ -161,7 +161,7 @@ async function generarListaOrdenadaON48(){
             lista_ordenadaON48.push([ticker, cotizacion_resultante])
         }
     })
-    lista_ordenadaON48.sort((a,b)=>{return b[1]-a[1]});
+    lista_ordenadaON48.sort((a,b)=>{return a[1]-b[1]});
     console.info(lista_ordenadaON48);
 }
 
