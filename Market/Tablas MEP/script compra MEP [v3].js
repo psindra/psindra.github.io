@@ -60,6 +60,7 @@ async function listarON(){
 
     window.extractoON = []
     window.document.body.innerHTML = "<h3> Cargando ON [v" + version + "]</h3>"
+    window.document.body.style.wordWrap = 'break-word'
     for (let i = 0; i < ss.length; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Acciones/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extractoON.push(ss[i]) ) : null
