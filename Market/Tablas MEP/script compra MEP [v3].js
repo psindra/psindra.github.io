@@ -1,4 +1,4 @@
-version = "3.1.4"
+version = "3.1.5"
 // bar = ""
 // bar =await fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?_ts=1634917153912&term=3&index=cedears").then(respuesta=>{return respuesta})
 // // bar =fetch("https://www.bullmarketbrokers.com/Information/StockPrice/GetStockPrices?term=3&index=cedears")
@@ -27,6 +27,7 @@ async function listarCEDEARS(){
 
     window.extracto = []
     window.document.body.innerHTML = "<h3> Cargando CEDEARS [v" + version + "]</h3>"
+    window.document.body.style.wordWrap = 'break-word'
     for (let i = 0; i < ss.length; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Cedears/" + total[i][0] + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extracto.push(ss[i]) ) : null
@@ -59,6 +60,7 @@ async function listarON(){
 
     window.extractoON = []
     window.document.body.innerHTML = "<h3> Cargando ON [v" + version + "]</h3>"
+    window.document.body.style.wordWrap = 'break-word'
     for (let i = 0; i < ss.length; i++) {
         ((await fetch("https://www.bullmarketbrokers.com/Cotizaciones/Acciones/" + total[i][0].slice(0, -1) + "D").then(resp=>{return resp})).status) == 200 ? 
         (total[i].push('✅') & window.extractoON.push(ss[i]) ) : null
