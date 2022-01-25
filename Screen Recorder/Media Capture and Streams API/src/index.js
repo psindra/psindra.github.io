@@ -5,9 +5,14 @@ let recorder, stream;
 
 async function startRecording() {
   stream = await navigator.mediaDevices.getDisplayMedia({
-    video: { mediaSource: "screen" ,
-			video: { frameRate: { ideal: 10} }},
-	audio: true
+    /*video: {kind: {exact: "videoinput" }}
+	//{ mediaSource: "screen" ,
+	//		video: { frameRate: { ideal: 10} }},
+	,audio: {
+		kind: {exact: "audioinput" }
+	}*/
+	video:true,
+	audio:true
   });
   recorder = new MediaRecorder(stream);
 
