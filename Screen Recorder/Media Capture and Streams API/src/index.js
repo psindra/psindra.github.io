@@ -59,4 +59,9 @@ stopDOM.addEventListener("click", () => {
 
   recorder.stop();
   streamFinal.getVideoTracks()[0].stop();
+  /* screenStream.getVideoTracks()[0].stop(); */
+  screenStream.getTracks()[0].stop()
+  screenStream.getTracks()[1].stop()
+  audioStream.getTracks()[0].stop()
+  
 });
