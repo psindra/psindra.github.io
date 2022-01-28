@@ -18,7 +18,9 @@ window.onload = ()=> {
   idb_request.onsuccess = ()=>{
     idb = idb_request.result;
     console.log("OPEN",idb);
-    historicoVideos = idb.transaction("historicoScreenRecording")
+    let historicoVideosKeys = idb.transaction("historicoScreenRecording")
+            .objectStore("historicoScreenRecording").getAllKeys();
+    let historicoVideos = idb.transaction("historicoScreenRecording")
             .objectStore("historicoScreenRecording").getAll();
 
     historicoVideos.onsuccess = ()=> {
@@ -26,9 +28,9 @@ window.onload = ()=> {
       historicoDom.style.marginTop = '10px'
       if (historicoVideos.result.length>0){
         historicoDom.innerHTML += "Anteriores: <br>";
-        historicoVideos.result.forEach(result =>{
+        historicoVideos.result.forEach((result, i) =>{
             let url = URL.createObjectURL(result);
-            historicoDom.innerHTML += `<a href=${url}>** ${url}</a>
+            historicoDom.innerHTML += `<a href=${url}>${url} ** ${historicoVideosKeys.result[i]}</a>
             <a href="#" onclick="videoDOM.src='${url}'">⏫</a><br>`;
         });
         playlistDOM.insertAdjacentElement('afterend',historicoDom);
@@ -89,9 +91,9 @@ async function startRecording() {
     videoDOM.src = URL.createObjectURL(completeBlob);
     videoDOM.controls = "controls"
     /* playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><button style="height:20px;font-size: 10px" onclick="videoDOM.src = ${videoDOM.src}">⬆</button><br>`; */
-    playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a>
+    playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src} - ${new Date().toLocaleString('sv')}</a>
                               <a href='#' onclick="videoDOM.src = '${videoDOM.src}'">➡</a><br>`;
-    idb.transaction("historicoScreenRecording", 'readwrite').objectStore("historicoScreenRecording").add(completeBlob);
+    idb.transaction("historicoScreenRecording", 'readwrite').objectStore("historicoScreenRecording").add(completeBlob, new Date().toLocaleString('sv'));
   };
 
   recorder.start();
