@@ -72,6 +72,7 @@ async function startRecording() {
   } catch (error) {
     alert("permitir microfono y captura de pantalla CON sonido");
     console.log(error)
+    stopDOM.click();
     return;
   }
 
@@ -112,12 +113,12 @@ stopDOM.addEventListener("click", () => {
   stopDOM.setAttribute("disabled", true);
   startDOM.removeAttribute("disabled");
 
-  recorder.stop();
+  recorder?.stop();
 
-  streamFinal.getVideoTracks()[0].stop();
   /* screenStream.getVideoTracks()[0].stop(); */
-  screenStream.getTracks()[0].stop()
-  screenStream.getTracks()[1].stop()
-  audioStream.getTracks()[0].stop()
+  screenStream?.getTracks()[0].stop()
+  audioStream?.getTracks()[0].stop()
+  screenStream?.getTracks()[1]?.stop()
+  streamFinal?.getVideoTracks()[0]?.stop();
   
 });
