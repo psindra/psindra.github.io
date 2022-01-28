@@ -115,7 +115,6 @@ stopDOM.addEventListener("click", () => {
 
   recorder?.stop();
 
-  /* screenStream.getVideoTracks()[0].stop(); */
   audioStream?.getTracks()[0]?.stop()
   screenStream?.getTracks()[0]?.stop()
   screenStream?.getTracks()[1]?.stop()
