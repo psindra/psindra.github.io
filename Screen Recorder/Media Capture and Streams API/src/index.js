@@ -45,8 +45,9 @@ async function startRecording() {
   recorder.onstop = e => {
     const completeBlob = new Blob(chunks, { type: chunks[0].type });
     videoDOM.src = URL.createObjectURL(completeBlob);
-	/* playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><button style="height:20px;font-size: 10px" onclick="videoDOM.src = ${videoDOM.src}">⬆</button><br>`; */
-	playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><br>`;
+    videoDOM.controls = "controls"
+    /* playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><button style="height:20px;font-size: 10px" onclick="videoDOM.src = ${videoDOM.src}">⬆</button><br>`; */
+    playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><br>`;
   };
 
   recorder.start();
