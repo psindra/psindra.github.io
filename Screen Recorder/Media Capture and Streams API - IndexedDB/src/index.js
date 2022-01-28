@@ -30,7 +30,7 @@ window.onload = ()=> {
         historicoDom.innerHTML += "Anteriores: <br>";
         historicoVideos.result.forEach((result, i) =>{
             let url = URL.createObjectURL(result);
-            historicoDom.innerHTML += `<a href=${url}>${url} ** ${historicoVideosKeys.result[i]}</a>
+            historicoDom.innerHTML += `<a href=${url} download="${historicoVideosKeys.result[i]}">${url} ** ${historicoVideosKeys.result[i]}</a>
             <a href="#" onclick="videoDOM.src='${url}'">⏫</a><br>`;
         });
         playlistDOM.insertAdjacentElement('afterend',historicoDom);
@@ -91,7 +91,7 @@ async function startRecording() {
     videoDOM.src = URL.createObjectURL(completeBlob);
     videoDOM.controls = "controls"
     /* playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src}</a><button style="height:20px;font-size: 10px" onclick="videoDOM.src = ${videoDOM.src}">⬆</button><br>`; */
-    playlistDOM.innerHTML += `<a href=${videoDOM.src}>${videoDOM.src} - ${new Date().toLocaleString('sv')}</a>
+    playlistDOM.innerHTML += `<a href=${videoDOM.src} download="${new Date().toLocaleString('sv')}">${videoDOM.src} - ${new Date().toLocaleString('sv')}</a>
                               <a href='#' onclick="videoDOM.src = '${videoDOM.src}'">➡</a><br>`;
     idb.transaction("historicoScreenRecording", 'readwrite').objectStore("historicoScreenRecording").add(completeBlob, new Date().toLocaleString('sv'));
   };
