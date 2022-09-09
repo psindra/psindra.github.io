@@ -54,7 +54,7 @@ async function listarON(){
     })
 
     window.extractoON = []
-    window.document.body.innerHTML = "<h3> Cargando ON [v" + version + "]</h3>"
+    window.document.body.innerHTML += "<h3> Cargando ON [v" + version + "]</h3>"
     window.document.body.style.wordWrap = 'break-word'
     return Promise.all(
         listadoON.map(item=>{
@@ -64,12 +64,12 @@ async function listarON(){
                     item.push('✅');
                     window.extractoON.push(item[0]);
                 }
-                document.body.firstElementChild.innerText += ".";
+                document.body.lastElementChild.innerText += "#";
                 return respuesta;
                 return Promise.resolve();
             })
             .catch(err=>{
-                document.body.firstElementChild.innerText += ".";
+                document.body.lastElementChild.innerText += "#";
                 Promise.resolve(err);
             });
         })
@@ -318,8 +318,9 @@ async function generarTabla(){
 // UN HTML 🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️🤷🏻‍♂️      -->  ENTONCES LOS PONGO EN FUNCIONES "ANIDADAS"
 async function funcionTotal(){
     if (typeof extracto == 'undefined'){
-        await listarCEDEARS();
-        await listarON();
+        // await listarCEDEARS();
+        // await listarON();
+        await Promise.all([listarCEDEARS(), listarON()])
     }
     await generarListaOrdenadaCEDEARS();
     await generarListaOrdenadaCEDEARS48();
