@@ -1,2 +1,4 @@
 *node_modules/
 /**/.env
+*.env
+Practicas_Programacion/JavaScript/BarcodeScanner/MongoDB_BarcodeScanner/.env
